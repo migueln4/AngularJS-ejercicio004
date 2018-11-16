@@ -6,7 +6,7 @@
 
 
         <!-- Incluir Bootstrap -->
-        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap.css">
 
         <!-- Animate.css -->
         <link rel="stylesheet" href="css/animate.css">
@@ -23,11 +23,41 @@
         <div class="container" ng-controller="listadoCtrl">
             
             <h1>ng-repeat</h1>
-            <h4>Manejando repeticiones</h4>
+            <h4>Repeticiones</h4>
             <hr>
 
-            
+            {{listado | json}}
 
+            <ul>
+                <li ng-repeat = "nombre in listado">
+                    {{nombre}}
+                </li>
+            </ul>
+
+            <div>
+                {{listadoLuchadores | json}}
+            </div>
+
+            <table class="table table-striped">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Título</th>
+                    <th>Equipo</th>
+                </tr>
+
+                <tr ng-repeat="luchador in listadoLuchadores.luchadores">
+                    <th>{{luchador.nombre}}</th>
+                    <th>{{luchador.titulo}}</th>
+                    <th>{{luchador.equipo}}</th>
+                </tr>
+                
+            </table>
+
+            <ul>
+                <li ng-repeat="numero in [0,1,2,3,4,5,6,7,8,9,56464]">
+                    2 · {{numero}} = {{2*numero}}
+                </li>
+            </ul>
 
         </div><!-- fin del listadoCtrl -->
 
