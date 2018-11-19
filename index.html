@@ -16,6 +16,18 @@
 
         <script src="js/app.js"></script>
 
+        <style>
+            .avatar{
+                width: 75px;
+                height: 75px;
+            }
+
+            .puntero {
+                cursor: pointer;
+            }
+
+        </style>
+
 
     </head>    
     <body>
@@ -50,7 +62,6 @@
                     <th>{{luchador.titulo}}</th>
                     <th>{{luchador.equipo}}</th>
                 </tr>
-                
             </table>
 
             <ul>
@@ -58,6 +69,68 @@
                     2 · {{numero}} = {{2*numero}}
                 </li>
             </ul>
+
+            <div>
+                {{personas | json}}
+            </div>
+
+            <hr>
+
+            <h2>Filtros</h2>
+            <h4>para el ng-repeat</h4>
+
+            <div class="row">
+                Búsqueda:
+                <br>
+                <input type="text" ng-model="busqueda.nombre" class="from-control" placeholder="¿A quién quieres buscar?">
+                <br>
+
+                Sexo:
+                <br>
+                <select ng-model="busqueda.sexo" class="from-control">
+                    <option value="">Cualquiera</option>
+                    <option value="mujer">Solo mujeres</option>
+                    <option value="hombre">Solo hombres</option>
+                </select>
+                <br>
+            </div>
+
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <td>Foto</td>
+                    <td><a class="puntero" ng-click="columna='nombre'; reverse = !reverse;">Nombre</a></td>
+                    <td><a class="puntero" ng-click="columna='sexo'; reverse = !reverse;">Sexo</a></td>
+                    <td>Fijo</td>
+                    <td>Móvil</td>
+                </tr>
+            </thead>
+            <tr ng-repeat="persona in personas | filter:busqueda | orderBy:columna:reverse ">
+                <td><img ng-src="img/{{persona.avatar}}" class="avatar rounded-circle"></td>
+                <td>{{persona.nombre}}</td>
+                <td>{{persona.sexo}}</td>
+                <td>{{persona.telefono}}</td>
+                <td>{{persona.celular}}</td>
+            </tr>
+            </table>
+
+            <hr>
+            <h2>ng-options</h2>
+            <h4>Repeticioens para elementos</h4>
+
+            <br>
+
+            Selecciona el país: {{paisSeleccionado}}
+            <select ng-model="paisSeleccionado" class="from-control">
+                <option value="">Selecciona uno</option>
+                <option ng-repeat="pais in paises" value="{{pais.id}}">{{pais.nombre}}</option>
+            </select>
+            <br>
+            <br>
+            Selecciona el país:
+            <select ng-model="paisSeleccionado" ng-options="pais.id as pais.nombre for pais in paises" class="from-control">
+                <option value="">Seleccionar</option>
+            </select>
 
         </div><!-- fin del listadoCtrl -->
 
